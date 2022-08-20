@@ -21,13 +21,17 @@ const getById = catchAsync(async (req, res) => {
 const create = catchAsync(async (req, res) => {
   const { title, file, language, topic, pageCount, author } = req.body;
   const createdAt = '2022/08/21';
-  const hash = '.....';
-  const thesis = await Thesis.create({ title, hash, language, topic, pageCount, author, createdAt });
+  const thesis = await Thesis.create({ title, file, language, topic, pageCount, author, createdAt });
   res.status(httpStatus.CREATED).send({ thesis });
+});
+
+const uploadFile = catchAsync(async (req, res) => {
+  res.status(httpStatus.OK).send({ url: req.file.path });
 });
 
 module.exports = {
   getAll,
   getById,
   create,
+  uploadFile,
 };

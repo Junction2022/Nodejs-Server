@@ -7,7 +7,7 @@ const thesisSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  hash: {
+  file: {
     type: String,
     required: true,
   },
