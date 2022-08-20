@@ -8,6 +8,10 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<User>}
  */
 const createUser = async (userBody) => {
+  const exists = await User.findOne({ id: userBody.id });
+  if (exists) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'duplicated id');
+  }
   return User.create(userBody);
 };
 
@@ -31,7 +35,7 @@ const queryUsers = async (filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (id) => {
-  return User.findById(id);
+  return User.findOne({ id });
 };
 
 /**
