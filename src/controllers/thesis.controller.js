@@ -15,9 +15,9 @@ const getById = catchAsync(async (req, res) => {
 
 const create = catchAsync(async (req, res) => {
   const { title, file, language, topic, pageCount, author } = req.body;
-  const createdAt = '2022/08/26';
+  const createdAt = '2022/08/21';
   const hash = '.....';
-  const thesis = Thesis.create(title, hash, language, topic, pageCount, author, createdAt);
+  const thesis = Thesis.create({ title, hash, language, topic, pageCount, author, createdAt });
   res.status(httpStatus.CREATED).send({ thesis });
 });
 
