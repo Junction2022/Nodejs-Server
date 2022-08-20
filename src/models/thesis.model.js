@@ -31,6 +31,7 @@ const thesisSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
+  comments: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
 });
 
 thesisSchema.plugin(toJSON);

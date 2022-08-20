@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const { toJSON, paginate } = require('./plugins');
 
 const commentSchema = new mongoose.Schema({
   text: { type: String, required: true, maxLength: 30 },
@@ -13,6 +14,9 @@ const commentSchema = new mongoose.Schema({
   createdAt: { type: Date, required: true, default: Date.now },
 });
 
+commentSchema.plugin(toJSON);
+commentSchema.plugin(paginate);
+
 const Comment = mongoose.model('Comment', commentSchema);
 
-export default Comment;
+module.exports = Comment;
