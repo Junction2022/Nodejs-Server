@@ -1,27 +1,20 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { Thesis } = require('../models');
+const thesisService = require('../services/thesis.service');
 
 const getAll = catchAsync(async (req, res) => {
-  const thesisList = await Thesis.find({}).sort({ createdAt: 'desc' });
+  const thesisList = await thesisService.getAllThesis();
   res.status(httpStatus.OK).send({ thesisList });
 });
 
 const getById = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const thesis = await Thesis.findOne({ _id: id }).populate({
-    path: 'comments',
-    populate: {
-      path: 'user',
-    },
-  });
+  const thesis = await thesisService.getThesisById(req.params.id);
   res.status(httpStatus.OK).send({ thesis });
 });
 
 const create = catchAsync(async (req, res) => {
   const { title, file, language, topic, pageCount, author } = req.body;
-  const createdAt = '2022/08/21';
-  const thesis = await Thesis.create({ title, file, language, topic, pageCount, author, createdAt });
+  const thesis = await thesisService.createThesis(title, file, language, topic, pageCount, author);
   res.status(httpStatus.CREATED).send({ thesis });
 });
 
