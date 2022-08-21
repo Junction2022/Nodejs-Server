@@ -16,7 +16,7 @@ const getThesisById = async (id) => {
 };
 
 const createThesis = async (title, file, language, topic, pageCount, author) => {
-  const createdAt = new Date().toLocaleString();
+  const createdAt = Date.now();
   const thesis = await Thesis.create({ title, file, language, topic, pageCount, author, createdAt });
   return thesis;
 };

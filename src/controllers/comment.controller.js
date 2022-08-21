@@ -1,22 +1,11 @@
 const httpStatus = require('http-status');
-const { Comment, Thesis } = require('../models');
+const { Comment } = require('../models');
 const catchAsync = require('../utils/catchAsync');
+const commentService = require('../services/comment.service');
 
 const create = catchAsync(async (req, res) => {
-  const createdAt = '2022/08/21';
   const { text, thesisId } = req.body;
-  const thesis = await Thesis.findOne({ _id: thesisId });
-
-  const comment = await Comment.create({
-    text,
-    user: '63014446d0d781bcb1fbd70e',
-    thesis: thesisId,
-    createdAt,
-  });
-
-  thesis.comments.push(comment._id);
-  await thesis.save();
-
+  const comment = commentService.createComment(text, thesisId);
   res.status(httpStatus.CREATED).send({ comment });
 });
 
