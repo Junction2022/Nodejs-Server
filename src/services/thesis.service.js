@@ -12,6 +12,9 @@ const getThesisById = async (id) => {
       path: 'user',
     },
   });
+  // eslint-disable-next-line no-plusplus
+  thesis.viewCount++;
+  await thesis.save();
   return thesis;
 };
 

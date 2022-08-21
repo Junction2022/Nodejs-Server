@@ -20,7 +20,7 @@ const thesisSchema = mongoose.Schema({
     required: true,
   },
   pageCount: {
-    type: String,
+    type: Number,
     required: true,
   },
   author: {
@@ -30,6 +30,18 @@ const thesisSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     required: true,
+  },
+  viewCount: {
+    type: Number,
+    default: 0,
+  },
+  downloadCount: {
+    type: Number,
+    default: 0,
+  },
+  exportCount: {
+    type: Number,
+    default: 0,
   },
   comments: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
 });
