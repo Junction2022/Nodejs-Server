@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
 const commentSchema = new mongoose.Schema({
-  text: { type: String, required: true, maxLength: 30 },
+  text: { type: String, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
   thesis: {
     type: mongoose.Schema.Types.ObjectId,

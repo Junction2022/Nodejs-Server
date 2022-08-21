@@ -19,7 +19,7 @@ const create = catchAsync(async (req, res) => {
 });
 
 const uploadFile = catchAsync(async (req, res) => {
-  res.status(httpStatus.OK).send({ url: req.file.path });
+  res.status(httpStatus.OK).send({ url: req.file.filename });
 });
 
 module.exports = {
